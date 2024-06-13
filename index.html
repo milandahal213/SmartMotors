@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Smart Motors</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8d8f49ff-9f62-43dd-bf08-47b2806df6ba" class="page sans"><header><img class="page-cover-image" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/smv.22.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/SmartMotorLogo240X240.png"/></div><h1 class="page-title">Smart Motors</h1><p class="page-description"></p></header><div class="page-body"><p id="00a25243-8363-497a-b51e-90665a8d441d" class="">Trainable Motor for Storytelling: in response to the challenge of <em><strong>introducing robotics to a classroom, especially with limited access to computers and WiFi.</strong></em></p><p id="872da5cb-e29e-4659-b2f6-71749332ed5d" class="">
+</p><hr id="90b87224-ce94-4287-b4db-16e53acd5c46"/><p id="0e932a5f-8bb9-48e0-8cf6-7c9c9c85faa5" class="">
+</p><div id="8a8d4de3-3822-4e1b-8275-530e78819166" class="collection-content"><h4 class="collection-title">QUICK LINKS</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Name</th><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th></tr></thead><tbody><tr id="1583931f-a736-450b-ad34-ed84d169620b"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/SEEEDUINO%20ESP32C3%201583931fa736450bad34ed84d169620b.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/SEEEDUINO%20ESP32C3%201583931fa736450bad34ed84d169620b/bitmap.png"/>SEEEDUINO ESP32C3</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:39 PM</time></td><td class="cell-P=vs"></td></tr><tr id="8c54e1ff-78f6-40da-8a05-894cae7ff8fd"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/LEGO%20SPIKE%20PRIME%208c54e1ff78f640da8a05894cae7ff8fd.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/LEGO%20SPIKE%20PRIME%208c54e1ff78f640da8a05894cae7ff8fd/SmartMotorSPIKELOGO280.png"/>LEGO SPIKE PRIME</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:24 PM</time></td><td class="cell-P=vs"></td></tr><tr id="79c32a10-6cdb-4eeb-9b9c-76bdb58e1d86"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Seeeduino%20Xiao%2079c32a106cdb4eeb9b9c76bdb58e1d86.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Seeeduino%20Xiao%2079c32a106cdb4eeb9b9c76bdb58e1d86/bitmap.png"/>Seeeduino Xiao</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:35 PM</time></td><td class="cell-P=vs"></td></tr><tr id="95ba9a0f-c946-408f-b7a8-a5c5fcaf30ee"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/WIO%20TERMINAL%2095ba9a0fc946408fb7a8a5c5fcaf30ee.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/WIO%20TERMINAL%2095ba9a0fc946408fb7a8a5c5fcaf30ee/SmartMotorWioTerminal240-4.png"/>WIO TERMINAL</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:24 PM</time></td><td class="cell-P=vs"></td></tr><tr id="4db05f97-4686-444e-abf5-06635d8850ca"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Grove%20Beginner%20Kit%204db05f974686444eabf506635d8850ca.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Grove%20Beginner%20Kit%204db05f974686444eabf506635d8850ca/SmartMotorLogo240X240.png"/>Grove Beginner Kit</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:26 PM</time></td><td class="cell-P=vs"></td></tr><tr id="fbfd8277-7ee9-40ef-a40a-3f225be1ea00"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Arduino%20Nano%20fbfd82777ee940efa40a3f225be1ea00.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Arduino%20Nano%20fbfd82777ee940efa40a3f225be1ea00/SmartMotorLogo240X240.png"/>Arduino Nano</a></td><td class="cell-UtL^"><time>@March 5, 2024 9:45 AM</time></td><td class="cell-P=vs"></td></tr><tr id="77e4ceda-0748-4023-ac97-07f491db972d"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/MICRO%20BIT%2077e4ceda07484023ac9707f491db972d.html"><img class="icon" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Arduino%20Nano%20fbfd82777ee940efa40a3f225be1ea00/SmartMotorLogo240X240.png"/>MICRO:BIT</a></td><td class="cell-UtL^"><time>@February 4, 2024 9:37 PM</time></td><td class="cell-P=vs"></td></tr><tr id="e9c772f8-9b6c-4c15-aaea-59ac25794195"><td class="cell-title"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/QUICK%20LINKS%208a8d4de338224e1b8275530e78819166/Untitled%20e9c772f89b6c4c15aaea59ac25794195.html">Untitled</a></td><td class="cell-UtL^"><time>@March 5, 2024 9:45 AM</time></td><td class="cell-P=vs"></td></tr></tbody></table><br/><br/></div><hr id="b2d5fe65-2796-4697-999e-1bf453ec44e5"/><p id="a893883f-3f71-40ef-9092-6f7d9cd5e8da" class="">
+</p><h1 id="a9a9096a-6ac4-42a3-bab9-97e41e5effc5" class="">What is a Smart Motor?</h1><div id="24f0cec5-d6bb-44d8-b732-a9e7d1f8a635" class="column-list"><div id="3fffb6d2-13cc-457c-ad37-dab2d62ab024" style="width:50%" class="column"><p id="18fbdc4c-0ca9-408a-a051-6aa96132dbe3" class="">Smart Motors are low-cost robotics tools developed at CEEO. The impetus for the development of Smart Motors comes from our belief that <em><strong>all children should have access to learning about engineering and robotics</strong></em>. One of the barriers we have found is the high cost of the kits and the need for expensive peripherals like computers and the Internet. To make it more accessible, we set out to build robust, low-cost, standalone solutions that teachers can use in their classrooms to enable students to learn about engineering and robotics playfully.</p></div><div id="b717bd8e-d1ad-409f-bb8c-492431d5d9b4" style="width:50%" class="column"><figure id="971f7030-9e67-4b83-aaa9-0abeb0bd1283"><div class="source"><a href="https://youtu.be/vQR2lgC9gco">https://youtu.be/vQR2lgC9gco</a></div><figcaption>See SmartMotors in action in a classroom in the Navajo Nation.</figcaption></figure></div></div><figure id="fcb0b751-49b8-4489-b058-1286a3f4d20f" class="image"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/SmartMotors.gif"><img style="width:708px" src="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/SmartMotors.gif"/></a></figure><p id="5cb260e2-87db-463e-93d9-64e8dbecf126" class=""><em><strong>With Smart Motor, we shift the focus from coding robots to training them</strong></em>, which we hope is much more intuitive for beginners and will consequently lower the barriers of entry to robotics for young children. Because of its lower cost and ease of use, we believe teachers will find it encouraging to integrate this tool in activities like Novel Engineering and other design challenges and help bring engineering and robotics into their classrooms. Smart Motor can also help teachers introduce topics like machine learning AI, and important topics like ethics surrounding the use of AI.</p><div id="53a42b52-dbb3-4f9a-adb1-7bd64bb8bd53" class="column-list"><div id="a8396206-4184-4ab9-b350-58df3c17a455" style="width:50%" class="column"><p id="21134234-55cf-4678-a1b1-a1256a186125" class="">Depending on the availability of computers and WiFi, Smart Motor can provide different opportunities for exploration for different levels of users. Beginners can simply use the pre-existing code to train their models, and advanced users with access to computers  can observe, edit, and input the training data, while further advanced users can either implement their own algorithm or use different sensors or combination of sensors  to fundamentally change the way these motors work.</p></div><div id="b94bb2f2-2198-423d-8dbd-586c55a4fabc" style="width:50%" class="column"><figure id="a45b2ea9-59cb-4005-b8f2-fd39c1ecd37f" class="image"><a href="https://s3.amazonaws.com/com.appolearning.files/production/uploads/uploaded_file/c3dd36a2-b189-4e52-8755-a14631631f40/IMG_0088.jpg"><img src="https://s3.amazonaws.com/com.appolearning.files/production/uploads/uploaded_file/c3dd36a2-b189-4e52-8755-a14631631f40/IMG_0088.jpg"/></a><figcaption>The v0.1 kit, sent to participants of the May 14th Hackathon</figcaption></figure></div></div><p id="6ae7c4c4-a1c6-40f0-983b-a34be4317530" class="">We also envision augmented reality to play a vital role in helping users understand how these motors behave. Using the AR to visualize the training data, users can understand what the sensor is measuring and why the motor behaves in a certain way. A further advanced use of AR could be to edit and clean the training data to make the models robust.</p><p id="4f0033ab-ccaf-4df5-b548-9d89cb52132e" class="">We have just begun to explore this amazing idea. And we welcome you to join us in this exploration.</p><h1 id="cb79aa75-271a-4bf3-99c4-888298a050cd" class="">Publications</h1><div id="5815e8c0-af29-4f7b-821c-d1c89cb590a9" class="column-list"><div id="97b510ed-1453-4305-8648-1fb1dd2bbd58" style="width:50%" class="column"><p id="3cddd338-a964-45f6-8f2f-7c05ab668ce3" class=""><a href="https://link.springer.com/chapter/10.1007/978-3-031-38454-7_20"><strong>Introductory Activities for Teaching Robotics with SmartMotors</strong></a></p></div><div id="52e104f4-852b-44f7-99f8-de19298f7a12" style="width:50%" class="column"><p id="c5a9541e-86f3-42b2-af81-53d78315b7dd" class=""><a href="https://ieeexplore.ieee.org/abstract/document/10343494/"><strong>International Collaboration to Increase Access to Educational Robotics for Students</strong></a></p></div></div><div id="3fa4641f-5ae0-424b-8b60-c5062262416f" class="column-list"><div id="6d079521-d6a0-4293-b3fd-b1fe983ced29" style="width:50%" class="column"><p id="53ef167a-537a-4e77-8ce7-5b52c57803f7" class="">Dahal, M., Kresin, L., &amp; Rogers, C. (2023, April). Introductory Activities for Teaching Robotics with SmartMotors. In <em>International Conference on Robotics in Education (RiE)</em> (pp. 229-241). Cham: Springer Nature Switzerland.<br/><br/></p></div><div id="34698a2c-9ec9-47bd-ae33-7df6400f1181" style="width:50%" class="column"><p id="99c9028e-76e0-409e-baba-133c917dfaaf" class="">Dahal, M., Kresin, L., Peres, A., Pereira, E. B., &amp; Rogers, C. (2023, October). International Collaboration to Increase Access to Educational Robotics for Students. In <em>2023 IEEE Frontiers in Education Conference (FIE)</em> (pp. 1-5). IEEE.</p></div></div><div id="46635a30-a3e1-4a96-9689-bb58ee7d1572" class="column-list"><div id="0a584936-d581-48ae-94b2-c5ed775e7bf5" style="width:50%" class="column"><figure id="6a6527e2-8638-4e67-a6d2-6d0626c13975"><div class="source"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Untitled.pdf">https://prod-files-secure.s3.us-west-2.amazonaws.com/70393fdc-a1da-457f-9275-941a3d05613c/fcbd6903-bc24-4029-986c-08a4cf225ce7/Untitled.pdf</a></div></figure></div><div id="c9a9dafe-db1e-4888-8f8b-aa9a5ccc65f2" style="width:50%" class="column"><figure id="a39972ba-ed1d-4473-b12a-ff13af88af4d"><div class="source"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Untitled%201.pdf">https://prod-files-secure.s3.us-west-2.amazonaws.com/70393fdc-a1da-457f-9275-941a3d05613c/6dd6bb1c-a3bf-4219-b4be-124a96b53954/Untitled.pdf</a></div></figure></div></div><p id="cf552d67-6534-44ac-ad6c-c0f703e0afd6" class="">
+</p><h1 id="0e73e760-7063-480b-98e9-9e9ba7725fae" class="">Posters</h1><p id="66a600ab-4cff-4b67-a802-4b9afceb74d9" class="">
+</p><figure id="195a9115-1daf-4c70-8de1-2bb5d669a782"><div class="source"><a href="https://www.onshape.com/academic/edu-web-content/research-symposium-posters/2023/Dahal,_M._-_Using_Onshape_to_design_Smart_Motors.pdf">https://www.onshape.com/academic/edu-web-content/research-symposium-posters/2023/Dahal,_M._-_Using_Onshape_to_design_Smart_Motors.pdf</a></div></figure><blockquote id="e7d2e33b-1764-4997-9cb1-6704ab21c115" class=""><mark class="highlight-orange">This material is based upon work supported by the National Science Foundation under Grant No. IIS-2119174. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</mark></blockquote><p id="154db3b0-1e4f-40fb-8b5b-4ccf6d992436" class="">
+</p><figure id="eb011af9-1b29-4b5b-9592-fd38a7c74278" class="link-to-page"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Switch%20eb011af91b294b5b9592fd38a7c74278.html">Switch</a></figure><figure id="960a043a-2030-4bba-b028-433bfcdccb16" class="link-to-page"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Breadboard%20960a043a20304bbab028433bfcdccb16.html">Breadboard </a></figure><figure id="13267319-88db-4efc-86dc-a897ba12557c" class="link-to-page"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Potentiometer%201326731988db4efc86dca897ba12557c.html">Potentiometer</a></figure><figure id="0f2bc5e7-ab7e-4d4c-bfc1-351cbf179a05" class="link-to-page"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Servo%20Motor%200f2bc5e7ab7e4d4cbfc1351cbf179a05.html">Servo Motor</a></figure><figure id="59ec30d4-b7a9-4cfc-bb51-bf071f2843ec" class="link-to-page"><a href="Smart%20Motors%208d8f49ff9f6243ddbf0847b2806df6ba/Light%20Dependent%20Resistor%2059ec30d4b7a94cfcbb51bf071f2843ec.html">Light Dependent Resistor</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
