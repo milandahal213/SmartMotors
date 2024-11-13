@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Assembly</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5851f42e-79b7-4784-92de-234230646bc7" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/hammer_red.svg"/></div><h1 class="page-title">Assembly</h1><p class="page-description"></p></header><div class="page-body"><p id="e0993ae2-2ee6-4d84-a6df-7ac016b4f14f" class="">The Smart Motor box using ESP32C3 is the current prototype that checks most of our boxes. We build our PCB from Seeed Studio in China. This helps us keep the price lower and accelerate the assembly process. </p><h1 id="5387d9e4-9002-4227-85e8-3e7cee762a2f" class="">Printed Circuit Board</h1><div id="252fbb51-2648-4e78-a679-c0b1fe3a4ffc" class="column-list"><div id="e384066b-4c9c-46dd-8b99-6dd839bc29e6" style="width:56.25%" class="column"><figure id="4f56b375-a246-416d-a57d-dfbe97cd3a4e" class="image"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.16.05_PM.png"><img style="width:432px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.16.05_PM.png"/></a></figure></div><div id="1ec86514-4c1f-46d9-a38a-9c5806433445" style="width:43.74999999999999%" class="column"><figure id="9019ae82-ab5d-4835-adb7-83185d8fbbdf" class="image"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.16.14_PM.png"><img style="width:1340px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.16.14_PM.png"/></a></figure></div></div><p id="258d10c9-075e-4176-b6dc-ac7f48803ee2" class="">Seeed Studio asks for gerber files, instructions and bill of materials which you can find below.</p><ol type="1" id="5e88a669-02be-461a-b115-cd3cf861b5c9" class="numbered-list" start="1"><li>Go <a href="https://www.seeedstudio.com/fusion_pcb.html">https://www.seeedstudio.com/fusion_pcb.html</a> . You might have to sign up and log in.</li></ol><ol type="1" id="83e66207-7a3b-4d84-bb9b-a5692e7ce502" class="numbered-list" start="2"><li>Upload gerber files <figure id="0697428e-2694-40f0-8711-ace6d50040ac"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Gerber_Files.zip">Gerber Files.zip</a></div></figure></li></ol><ol type="1" id="47d911f7-0420-4439-a9a9-826f688677ce" class="numbered-list" start="3"><li>Upload instructions<figure id="ec42f803-9e6f-45b1-bc81-2ddbe635d9de"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Instructions.zip">Instructions.zip</a></div></figure></li></ol><ol type="1" id="a64833a5-2729-482f-b29b-c1beb45639a5" class="numbered-list" start="4"><li>Upload bill of materials <figure id="eb7c9441-bd5e-4962-b4cf-8af6edcc7bcf"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Bill_of_Materials.xlsx">Bill of Materials.xlsx</a></div></figure></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8acf9a50-1661-4c99-8817-3947aa31e742"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">It takes about a month for them to ship the PCBs. </div></figure><h1 id="a05282da-035e-4013-b830-51993ce57faf" class="">Materials</h1><p id="38233acf-df12-4662-97a1-b0a752e8417a" class="">You will need following materials</p><ol type="1" id="6f8cfec8-0e4c-4927-83d8-6bc9c5b7d0ce" class="numbered-list" start="1"><li>I²C OLED display</li></ol><ol type="1" id="0dded641-6497-4e65-b4c7-8720a6f039f5" class="numbered-list" start="2"><li>servo motor</li></ol><ol type="1" id="b9d49162-d616-409c-8753-df67cb95f334" class="numbered-list" start="3"><li>battery</li></ol><ol type="1" id="ab6016f4-304f-49e9-979b-cf2f425a9a68" class="numbered-list" start="4"><li>PLA filament for 3D printing</li></ol><ol type="1" id="6ba78eab-4383-4e99-b864-3b7fce52f8ce" class="numbered-list" start="5"><li>3-mm plywood for laser cutting</li></ol><ol type="1" id="6c32dba8-b3b7-435c-bb08-9e5d99cbcc66" class="numbered-list" start="6"><li>M2 screw, 6 mm</li></ol><ol type="1" id="606ac8cd-027e-4f38-a9b6-014f7d0dd09b" class="numbered-list" start="7"><li>M2 screw, 10 mm</li></ol><ol type="1" id="1d5cbbe9-65ed-4834-be79-f677fe960293" class="numbered-list" start="8"><li>M2 screw, 20 mm</li></ol><ol type="1" id="73747c7a-2641-4ed8-a09c-7cce7390d894" class="numbered-list" start="9"><li>M2 threaded insert</li></ol><ol type="1" id="da50a904-0c52-4365-8e03-8911eea8d7b1" class="numbered-list" start="10"><li>button cap</li></ol><ol type="1" id="9d199068-4bb3-4bc5-84c4-4cc278789de4" class="numbered-list" start="11"><li>Grove light sensor</li></ol><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Prices and links from Spring 2024 </summary><div class="indented"><p id="68c0d4d0-f410-414b-92fe-a0540f532f86" class="">The table below lists all the materials and links you will need. The prices may vary. </p><table id="0619471e-1354-4bfc-bcd4-80793fd43562" class="simple-table"><tbody><tr id="d967e111-02ea-4f54-9018-64e871d1d769"><td id="Da|^" class="" style="width:257px">Part</td><td id="GAlq" class="" style="width:106px">Amount for 1 Smart Motor</td><td id="[G?o" class="" style="width:105px">Price per Smart Motor</td><td id="QZC]" class="">Amount in 1 Package</td><td id="wULn" class="">Price per Package</td><td id="^_IH" class="" style="width:647px">Link</td></tr><tr id="11ef6113-5a51-4696-82fa-ca1c6c45c6b9"><td id="Da|^" class="" style="width:257px">soldered PCB for ESP</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$14.32</td><td id="QZC]" class="">100</td><td id="wULn" class="">$<strong>1431.59</strong></td><td id="^_IH" class="" style="width:647px"></td></tr><tr id="e21affa4-b7c0-47bc-821a-68c4a586fc3f"><td id="Da|^" class="" style="width:257px">I²C OLED display</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$2.20</td><td id="QZC]" class="">10</td><td id="wULn" class="">$21.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.amazon.com/dp/B08VNRH5HR?ref_=cm_sw_r_cp_ud_dp_8MKEM8ZR80PW4QFN1HQM&amp;th=1">https://a.co/d/3HNpYIu</a></td></tr><tr id="533d4156-a0fd-4394-931b-e28cf4e391ca"><td id="Da|^" class="" style="width:257px">servo motor</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$1.42</td><td id="QZC]" class="">12</td><td id="wULn" class="">$16.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.amazon.com/dp/B08FJ27Q1H?ref_=cm_sw_r_cp_ud_dp_047V8WYTC6DWHME50E6M_1&amp;th=1">https://www.amazon.com/dp/B08FJ27Q1H?ref_=cm_sw_r_cp_ud_dp_047V8WYTC6DWHME50E6M_1&amp;th=1</a></td></tr><tr id="c9d31638-0655-496b-b858-da707d347368"><td id="Da|^" class="" style="width:257px">battery</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$6.49</td><td id="QZC]" class="">1</td><td id="wULn" class="">$6.49</td><td id="^_IH" class="" style="width:647px"><a href="https://www.adafruit.com/product/4236">https://www.adafruit.com/product/4236</a></td></tr><tr id="76589287-84dc-4c16-a877-4ea85dfbd6da"><td id="Da|^" class="" style="width:257px">PLA filament for 3D printing</td><td id="GAlq" class="" style="width:106px">17 grams</td><td id="[G?o" class="" style="width:105px">$0.51</td><td id="QZC]" class="">1000 grams</td><td id="wULn" class="">$29.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.prusa3d.com/product/prusament-pla-azure-blue-1kg/">https://www.prusa3d.com/product/prusament-pla-azure-blue-1kg/</a></td></tr><tr id="0c636c5e-0a31-49f5-8a19-45d4cb911313"><td id="Da|^" class="" style="width:257px">3-mm plywood for laser cutting</td><td id="GAlq" class="" style="width:106px">24 in²</td><td id="[G?o" class="" style="width:105px">$0.83</td><td id="QZC]" class="">864 in²</td><td id="wULn" class="">$29.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/02hFS31">https://a.co/d/02hFS31</a></td></tr><tr id="b12d9241-dfbd-4b94-ad57-03b35602ce51"><td id="Da|^" class="" style="width:257px">M2 screw, 6 mm</td><td id="GAlq" class="" style="width:106px">12</td><td id="[G?o" class="" style="width:105px">$0.67</td><td id="QZC]" class="">100</td><td id="wULn" class="">$5.58</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A003">https://www.mcmaster.com/catalog/129/3434/92010A003</a></td></tr><tr id="7ccfb39b-c264-4329-ad89-f9d1b9b55d77"><td id="Da|^" class="" style="width:257px">M2 nut</td><td id="GAlq" class="" style="width:106px">5</td><td id="[G?o" class="" style="width:105px">$0.3</td><td id="QZC]" class="">100</td><td id="wULn" class="">$6.14</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/91828A111">https://www.mcmaster.com/91828A111</a></td></tr><tr id="9c7ef087-c671-48e0-bd73-51d796a42b9a"><td id="Da|^" class="" style="width:257px">M2 screw, 10 mm</td><td id="GAlq" class="" style="width:106px">2</td><td id="[G?o" class="" style="width:105px">$0.12</td><td id="QZC]" class="">100</td><td id="wULn" class="">$5.84</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A005">https://www.mcmaster.com/catalog/129/3434/92010A005</a></td></tr><tr id="3826622f-3da8-4f13-82ae-3dba2482fdb8"><td id="Da|^" class="" style="width:257px">M2 screw, 20 mm</td><td id="GAlq" class="" style="width:106px">3</td><td id="[G?o" class="" style="width:105px">$0.13</td><td id="QZC]" class="">100</td><td id="wULn" class="">$6.30</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A010">https://www.mcmaster.com/catalog/129/3434/92010A010</a></td></tr><tr id="5ece0a47-a66a-4308-bb28-59163a2b8283"><td id="Da|^" class="" style="width:257px">M2 threaded insert</td><td id="GAlq" class="" style="width:106px">12</td><td id="[G?o" class="" style="width:105px">$1.03</td><td id="QZC]" class="">100</td><td id="wULn" class="">$8.59</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/98NpNFI">https://a.co/d/98NpNFI</a></td></tr><tr id="fb64311f-02aa-476a-8055-441f3d46a5e5"><td id="Da|^" class="" style="width:257px">button cap</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$0.13</td><td id="QZC]" class="">70</td><td id="wULn" class="">$8.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/3mET0ZG">https://a.co/d/3mET0ZG</a></td></tr><tr id="c7e4a17e-116a-4a86-aa95-6807eccc693b"><td id="Da|^" class="" style="width:257px">Grove light sensor</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$1.99</td><td id="QZC]" class="">1</td><td id="wULn" class="">$1.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html">https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html</a></td></tr><tr id="41f2faf1-e371-47b7-a943-93288d0bcaec"><td id="Da|^" class="" style="width:257px">total</td><td id="GAlq" class="" style="width:106px"></td><td id="[G?o" class="" style="width:105px"></td><td id="QZC]" class=""></td><td id="wULn" class=""></td><td id="^_IH" class="" style="width:647px"></td></tr></tbody></table><p id="9f7a93f8-e081-4ddd-a2ca-c3fbb1e9ff44" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Prices and links from summer 2023</summary><div class="indented"><table id="6c663574-1789-434d-a161-70a38a7336dd" class="simple-table"><tbody><tr id="1b977d60-cd63-4db1-b3be-5055ff59c70e"><td id="Da|^" class="" style="width:257px">Part</td><td id="GAlq" class="" style="width:106px">Amount for 1 Smart Motor</td><td id="[G?o" class="" style="width:105px">Price per Smart Motor</td><td id="QZC]" class="">Amount in 1 Package</td><td id="wULn" class="">Price per Package</td><td id="^_IH" class="" style="width:647px">Link</td></tr><tr id="076d0d0f-fa6d-493f-b54d-0d7c47ff5c98"><td id="Da|^" class="" style="width:257px">soldered PCB for ESP</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$15.23</td><td id="QZC]" class="">100</td><td id="wULn" class="">$1522.57</td><td id="^_IH" class="" style="width:647px"></td></tr><tr id="404a4145-c895-4da3-8b31-9e0bbef4803f"><td id="Da|^" class="" style="width:257px">I²C OLED display</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$2.20</td><td id="QZC]" class="">10</td><td id="wULn" class="">$21.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/3HNpYIu">https://a.co/d/3HNpYIu</a></td></tr><tr id="56dfd4e5-a94f-4d58-b0ad-3cd63753793c"><td id="Da|^" class="" style="width:257px">servo motor</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$1.42</td><td id="QZC]" class="">12</td><td id="wULn" class="">$16.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/d2vIMqX">https://a.co/d/d2vIMqX</a></td></tr><tr id="3512ad71-5445-4da9-be43-841491ffcf4f"><td id="Da|^" class="" style="width:257px">battery</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$6.49</td><td id="QZC]" class="">1</td><td id="wULn" class="">$6.49</td><td id="^_IH" class="" style="width:647px"><a href="https://www.digikey.com/en/products/detail/us-electronics-inc./USE-702528-500PCBJST/15781479">https://www.digikey.com/en/products/detail/us-electronics-inc./USE-702528-500PCBJST/15781479</a></td></tr><tr id="fe076458-432c-49dc-a06f-45b080671341"><td id="Da|^" class="" style="width:257px">PLA filament for 3D printing</td><td id="GAlq" class="" style="width:106px">17 grams</td><td id="[G?o" class="" style="width:105px">$0.51</td><td id="QZC]" class="">1000 grams</td><td id="wULn" class="">$29.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.prusa3d.com/product/prusament-pla-azure-blue-1kg/">https://www.prusa3d.com/product/prusament-pla-azure-blue-1kg/</a></td></tr><tr id="0c6b707c-df61-48ce-946a-ce38c75ae5ea"><td id="Da|^" class="" style="width:257px">3-mm plywood for laser cutting</td><td id="GAlq" class="" style="width:106px">24 in²</td><td id="[G?o" class="" style="width:105px">$0.83</td><td id="QZC]" class="">864 in²</td><td id="wULn" class="">$29.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/02hFS31">https://a.co/d/02hFS31</a></td></tr><tr id="b8f1f0fe-2e92-4a0f-a1f1-864ba7754a5f"><td id="Da|^" class="" style="width:257px">M2 screw, 6 mm</td><td id="GAlq" class="" style="width:106px">12</td><td id="[G?o" class="" style="width:105px">$0.67</td><td id="QZC]" class="">100</td><td id="wULn" class="">$5.58</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A003">https://www.mcmaster.com/catalog/129/3434/92010A003</a></td></tr><tr id="ded93f06-5251-4ece-9507-0733b8b95ae1"><td id="Da|^" class="" style="width:257px">M2 screw, 10 mm</td><td id="GAlq" class="" style="width:106px">2</td><td id="[G?o" class="" style="width:105px">$0.12</td><td id="QZC]" class="">100</td><td id="wULn" class="">$5.84</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A005">https://www.mcmaster.com/catalog/129/3434/92010A005</a></td></tr><tr id="585b3711-67a8-42f5-9d34-b6eeac9e6e25"><td id="Da|^" class="" style="width:257px">M2 screw, 20 mm</td><td id="GAlq" class="" style="width:106px">3</td><td id="[G?o" class="" style="width:105px">$0.13</td><td id="QZC]" class="">100</td><td id="wULn" class="">$6.30</td><td id="^_IH" class="" style="width:647px"><a href="https://www.mcmaster.com/catalog/129/3434/92010A010">https://www.mcmaster.com/catalog/129/3434/92010A010</a></td></tr><tr id="fa4ae3b1-c3e6-41e6-a722-93761a5e8f9c"><td id="Da|^" class="" style="width:257px">M2 threaded insert</td><td id="GAlq" class="" style="width:106px">12</td><td id="[G?o" class="" style="width:105px">$1.03</td><td id="QZC]" class="">100</td><td id="wULn" class="">$8.59</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/98NpNFI">https://a.co/d/98NpNFI</a></td></tr><tr id="5aa56b20-b4d3-433c-be66-3727632d7859"><td id="Da|^" class="" style="width:257px">button cap</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$0.13</td><td id="QZC]" class="">70</td><td id="wULn" class="">$8.99</td><td id="^_IH" class="" style="width:647px"><a href="https://a.co/d/3mET0ZG">https://a.co/d/3mET0ZG</a></td></tr><tr id="259baca9-ceb5-4c38-8f1a-420c06f0c8e9"><td id="Da|^" class="" style="width:257px">Grove light sensor</td><td id="GAlq" class="" style="width:106px">1</td><td id="[G?o" class="" style="width:105px">$1.99</td><td id="QZC]" class="">1</td><td id="wULn" class="">$1.99</td><td id="^_IH" class="" style="width:647px"><a href="https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html">https://www.seeedstudio.com/Grove-Light-Sensor-v1-2-LS06-S-phototransistor.html</a></td></tr><tr id="8176b5d3-1c65-47ac-b0c6-1f1e1e69eb61"><td id="Da|^" class="" style="width:257px">total</td><td id="GAlq" class="" style="width:106px"></td><td id="[G?o" class="" style="width:105px">$30.75</td><td id="QZC]" class=""></td><td id="wULn" class=""></td><td id="^_IH" class="" style="width:647px"></td></tr><tr id="791de043-22d6-427f-8bde-406ec2bb92ab"><td id="Da|^" class="" style="width:257px"></td><td id="GAlq" class="" style="width:106px"></td><td id="[G?o" class="" style="width:105px"></td><td id="QZC]" class=""></td><td id="wULn" class=""></td><td id="^_IH" class="" style="width:647px"></td></tr></tbody></table></div></details><h1 id="1261268a-2379-41e7-accb-fb294ca8bec9" class="">Assembly</h1><figure id="41e6676e-45dd-43dd-8d8e-cd12e12eebe7" class="image"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.39.53_PM.png"><img style="width:384px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.39.53_PM.png"/></a><figcaption>Rendering of 3D printed parts</figcaption></figure><h2 id="039972cf-4daf-4d65-a0af-17a81b7ca16a" class="">3D print the following parts</h2><figure id="f92ecc21-e52d-48e7-a0bb-ba6dd36673cf"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/TOP.stl">TOP.stl</a></div></figure><figure id="484c9e25-cfef-4979-9753-97f4a43e683a"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/BOTTOM.stl">BOTTOM.stl</a></div></figure><figure id="8049cdf9-0726-4eed-adb2-291b50f09492"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/SUPPORT.stl">SUPPORT.stl</a></div></figure><h2 id="7b1f2c50-d877-45f8-9cf1-ad16427776d7" class="">Laser cut the following parts</h2><figure id="5d714130-b9d0-4d42-8320-6a733ce8ef6b"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Front.dxf">Front.dxf</a></div></figure><figure id="f8e5b834-b6dc-4dab-8cb9-b9945ab43c25"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Right.dxf">Right.dxf</a></div></figure><figure id="ae8cf527-cb92-437d-b6d6-9507263fa9a6"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Back.dxf">Back.dxf</a></div></figure><figure id="f3a5778d-63e6-4d5e-afc7-ad387fdd4da2"><div class="source"><a href="Assembly%205851f42e79b7478492de234230646bc7/Left.dxf">Left.dxf</a></div></figure><h2 id="005280ba-8a1a-419d-a610-13476f89b3e1" class="">Preparing for Assembly</h2><p id="5c4bdf9f-0f5a-4eeb-9570-a7f8428c4d56" class="">You will need to some preparation before assembling the parts. </p><ol type="1" id="b1e3bf8a-530c-45e5-8b5a-b736ef8a3b9d" class="numbered-list" start="1"><li>First of all, 3D print all the parts from above. </li></ol><ol type="1" id="e751d35a-dba3-429a-9922-bd93906286e0" class="numbered-list" start="2"><li>Insert the threaded inserts (from the list of materials) into the pilot holes on the 3D printed parts for M2 bolts. </li></ol><ol type="1" id="281488d3-ada2-4354-a856-7e0e85e8fc88" class="numbered-list" start="3"><li>Laser cut all the parts from the list above. </li></ol><ol type="1" id="d04ab533-85b0-47ae-929f-c12a680e7a9e" class="numbered-list" start="4"><li>Attach the servo motor (from the list of materials) to the side that is marked Back. </li></ol><ol type="1" id="467fcb92-0b81-46cf-95ef-98c5bff4583c" class="numbered-list" start="5"><li>You may nor may not need to solder the screen. In the current version, you will need to solder the screen (from the list of materials) to the board. Make sure you are soldering to the holes on the bottom row as shown in the image below. <figure id="dcb842b5-0005-4a8b-9607-b606f561c6c7" class="image"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.50.23_PM.png"><img style="width:240px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.50.23_PM.png"/></a><figcaption><mark class="highlight-default">Soldering ssd1306  OLED screen on PCB</mark></figcaption></figure></li></ol><ol type="1" id="3a1d87a7-b1b8-4325-a19b-a814fa65456a" class="numbered-list" start="6"><li>Connect the battery to the battery port.</li></ol><ol type="1" id="2dc7ee2d-15a1-413c-ae93-f418cb0ffb53" class="numbered-list" start="7"><li>Sandwich the PCB between TOP and SUPPORT (from the 3D printing list) using 20mm M2 bolts and nuts.</li></ol><ol type="1" id="c8b1a6a2-adc0-452d-b6eb-43a8a7d4087e" class="numbered-list" start="8"><li>Connect the servo motor to the motor port as shown below. There are 4 pins but most of the servo come with 3 pins. It is important to connect the board as shown, ensuring the GND (usually the black wire) is in the inside. <figure id="7066ff06-e464-4829-8f99-0bc5aa890823" class="image"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.54.28_PM.png"><img style="width:240px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-23_at_2.54.28_PM.png"/></a><figcaption>Connecting the motor to the PCB</figcaption></figure></li></ol><ol type="1" id="8272b45a-3e12-47bc-9b78-50f6939634cf" class="numbered-list" start="9"><li>Use 4mm M2 bolts to connect the side panels together. </li></ol><ol type="1" id="6ce05a9b-0adb-4a79-88b9-238fe3b483e4" class="numbered-list" start="10"><li>Finally, connect the BOTTOM piece using 4mm M2 bolts.</li></ol><p id="4b03699f-b022-4159-badc-e389630ff170" class="">
+</p><figure id="11d87679-caf4-460e-b7ba-724551a89a8a" class="image" style="text-align:center"><a href="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-22_at_12.29.22_PM.png"><img style="width:384px" src="Assembly%205851f42e79b7478492de234230646bc7/Screenshot_2024-01-22_at_12.29.22_PM.png"/></a><figcaption>A fully assembled Smart Motor box with a sensor</figcaption></figure><p id="931cc11b-f148-40bd-83eb-202b6a74cf19" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e3d74d67-5d97-4ae0-bdda-21aab5f1fe0b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Approximate Assembly Time for One Smart Motor<table id="b289a64a-d879-43d0-ba20-88dcb3af3c6c" class="simple-table"><tbody><tr id="cdbde00f-5403-47f8-811c-186da67fab1f"><td id="VMmV" class="">3D printing</td><td id="ITwG" class="">1 hour 45 minutes</td></tr><tr id="112e64e4-333a-48fc-94a6-190b193fc5ef"><td id="VMmV" class="">Laser cutting</td><td id="ITwG" class="">6 minutes</td></tr><tr id="c50a2568-2536-43c6-b096-b536e919401d"><td id="VMmV" class="">Manual assembly</td><td id="ITwG" class="">15 minutes</td></tr></tbody></table></div></figure><h1 id="ed4961f2-7f85-470c-8949-0fd61762c08f" class="">Code the Smart Motor</h1><ol type="1" id="03850d8a-8012-4325-a548-62b127a5248e" class="numbered-list" start="1"><li>You will need to install micro python on your ESP32C3 boards. Find the instructions <a href="https://wiki.seeedstudio.com/XIAO_ESP32C3_MicroPython/">here</a>. </li></ol><ol type="1" id="2271ec16-05df-4b81-8b99-b140bf6568ea" class="numbered-list" start="2"><li>Find the code from our GitHub links below and upload them to the ESP32C3 using a USB-C cable. <blockquote id="7c0dd351-275b-49d3-ad4c-2fc332303a0f" class="">Use this tool to upload the code <p id="40d5b35d-e135-4149-bea8-ac05f48179d1" class=""><a href="https://mdahal01.pyscriptapps.com/smart-motor-update-portal/latest/">https://mdahal01.pyscriptapps.com/smart-motor-update-portal/latest/</a> </p></blockquote></li></ol><p id="5102b510-0d96-46c5-8255-a58f5df1aaf9" class="">
+</p><h2 id="d186a839-aeea-462e-8d34-8cf35b3e12d8" class="">Option 1: Standalone Code</h2><p id="c84a5ab5-b89b-4de7-9bc0-21c948953c7c" class=""><a href="https://github.com/tuftsceeo/SmartMotors">https://github.com/tuftsceeo/SmartMotors</a></p><h2 id="2b683bf7-c227-45a9-88e3-b65b76cffc97" class="">Option 2: Web Code</h2><p id="77c9b8fd-c17a-4c81-9ca1-b2e7ea221082" class=""><a href="https://smart-motors.web.app/">https://smart-motors.web.app/</a></p><p id="8ee52673-656e-4aae-a135-31630a8e38ae" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

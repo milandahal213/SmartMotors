@@ -1,0 +1,863 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Construction: SmartMotor with Grove Beginner Kit</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7494be42-a9f7-4a7e-82b8-d9f0d0e71b2b" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/hammer_red.svg"/></div><h1 class="page-title">Construction: SmartMotor with Grove Beginner Kit</h1><p class="page-description"></p></header><div class="page-body"><p id="a36cccf6-bb0a-4adb-a46a-860c4f0a3947" class="">
+</p><p id="cc9670f6-3db2-4eb8-9170-9549d2767a38" class=""><strong>We will need …</strong><div class="indented"><ul id="14032c7e-a786-490c-9458-96f617bbcf0e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.seeedstudio.com/Grove-Beginner-Kit-for-Arduino-p-4549.html">A Grove Beginner Kit </a></li></ul><ul id="6fde7f90-7145-465d-a891-2d8f8f4da9e5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://shop.m5stack.com/products/servo-kit-180">An M5Stack Servo Motor</a></li></ul><ul id="ca976937-d030-4566-9d64-d29e91ac50ec" class="bulleted-list"><li style="list-style-type:disc">A computer with <a href="https://www.arduino.cc/en/software">Arduino IDE</a> to upload the code</li></ul></div></p><p id="1dee57d7-8d25-45fe-bb5a-137b5007146e" class="">
+</p><h1 id="fc1650b2-804d-458c-873e-c69ff9dae35e" class="">Step 1: Assembly</h1><figure id="1d1efab7-a3ae-443b-8feb-ddc07608288a" class="image"><a href="Construction%20SmartMotor%20with%20Grove%20Beginner%20Kit%207494be42a9f74a7e82b8d9f0d0e71b2b/Screen-Shot-2021-04-28-at-3.07.28-PM-2048x1344-2.png"><img style="width:672px" src="Construction%20SmartMotor%20with%20Grove%20Beginner%20Kit%207494be42a9f74a7e82b8d9f0d0e71b2b/Screen-Shot-2021-04-28-at-3.07.28-PM-2048x1344-2.png"/></a></figure><p id="89f8a69b-e672-4173-bbdb-ddb30cd6698e" class=""><div class="indented"><ol type="1" id="07a1d516-ecf6-42b9-8c5f-84c4a35fa910" class="numbered-list" start="1"><li>Open the Grove Beginner Kit box.</li></ol><ol type="1" id="cfb8517e-d9df-4111-946b-029812201a14" class="numbered-list" start="2"><li>Take out two Grove Cables from the left pocket. Grove Cables are the colorful wires with white connectors on both ends.</li></ol><ol type="1" id="08b3554b-dc9a-4485-a839-49605a0b3611" class="numbered-list" start="3"><li>DO NOT take out the board from the box.</li></ol><ol type="1" id="4c1cf253-c4bb-4a17-954f-d833da47a82c" class="numbered-list" start="4"><li>Plug in one Grove cable to D3 in the central board and plug the other end it to the LED (as shown in the picture)</li></ol><ol type="1" id="00cfc7b2-f623-4058-8af5-4349724dbb29" class="numbered-list" start="5"><li>Pug in another Grove cable to D6 in the central board and plug its other end to the M5 motor (as shown in the picture)</li></ol><ol type="1" id="f3927a62-d760-4d0d-91a3-6f087b40b643" class="numbered-list" start="6"><li>Take out the micro USB cable from the right.</li></ol><ol type="1" id="11520893-a567-4e43-97da-df8d96a3e250" class="numbered-list" start="7"><li>Plug the Lotus board in the box into the USB port on your computer to load the program.</li></ol></div></p><p id="deb592f1-5228-4a93-a653-f1e910a06301" class=""><div class="indented"><figure id="66796a85-4a8c-4ae3-a4e3-2b7b4f5d40af"><div class="source"><a href="https://youtu.be/rG1Bxqu5y0s">https://youtu.be/rG1Bxqu5y0s</a></div></figure></div></p><p id="20536648-4e00-491e-a942-9fb299a07bc0" class="">
+</p><p id="a657b5e3-32d8-4cc2-a166-00355cb9d5f5" class="">
+</p><h1 id="7165086b-e160-4e20-b0b1-9de05ca8ad58" class="">Step 2: Upload the Code</h1><ol type="1" id="5a1d0d52-c03d-4494-a5e3-cc7ca49b3b9c" class="numbered-list" start="1"><li>Download the following Arduino Code<figure id="a1f6eac5-8433-4237-9dd0-2f00851355ad"><div class="source"><a href="Construction%20SmartMotor%20with%20Grove%20Beginner%20Kit%207494be42a9f74a7e82b8d9f0d0e71b2b/SmartMotorsGBK.ino">SmartMotorsGBK.ino</a></div></figure></li></ol><ol type="1" id="80e9d318-0c81-457c-9bd2-65721c8aa1c5" class="numbered-list" start="2"><li>Open the file with Arduino IDE</li></ol><ol type="1" id="ab496aab-3147-46d4-8020-88208f087ff8" class="numbered-list" start="3"><li>Upload the code to your Grove Beginners Kit</li></ol><p id="d6938125-e919-477f-85fc-74930377d66b" class=""> </p><p id="7086a05b-252a-4a1b-b5cd-06671aeebdf0" class="">
+</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="91b5880c-3516-4a9a-bfb4-14f81f129ff1" class="code"><code class="language-Objective-C">#include &lt;Arduino.h&gt;
+#include &lt;U8g2lib.h&gt;
+ 
+#ifdef U8X8_HAVE_HW_SPI
+#include &lt;SPI.h&gt;
+#endif
+#ifdef U8X8_HAVE_HW_I2C
+#include &lt;Wire.h&gt;
+#endif
+#include &quot;LIS3DHTR.h&quot;
+LIS3DHTR&lt;TwoWire&gt; LIS; //IIC
+#define WIRE Wire
+ 
+U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);  // High speed I2C
+
+#include&lt;Servo.h&gt;
+
+int servoPin =7; 
+int LEDPin =3; 
+int sensorPin = A0;
+int buzzerPin= 5;
+int lightPin = A6;
+const int button = 6;
+
+Servo Servo1; 
+float Rspeed = 0; 
+int brightness = 0;
+int buttonState = 0;
+char C_bright[]=&quot;1000&quot;;
+char C_angle[]=&quot;180&quot;;
+char C_count[]=&quot;10&quot;;
+
+
+int turn_angle =0; 
+int fade_value=0;
+int count=0;
+int mini=0;
+int pos=0;
+int dist=0;
+
+char *Tstatus;
+char *Mode=&quot;Mode1&quot;;
+
+int flipState=0;
+int training[10][2];
+
+
+
+int conv(float ang){
+  float angle=ang *180/1023;
+  return angle;
+}
+
+int fade(float ang){
+  float fadeValue=ang *255/1023;
+  return fadeValue;
+}
+
+void buzz(int count, int timer=500){
+      for (int i=0;i&lt;count;i++){
+      analogWrite(buzzerPin, 200);
+      delay(timer);
+      analogWrite(buzzerPin, 0);
+      delay(100);
+      }
+}
+
+void disp(){
+  itoa(turn_angle, C_angle, 10);
+  itoa(brightness, C_bright, 10);
+  itoa(count, C_count,10);
+  u8g2.clearBuffer();                   // clear the internal memory
+  u8g2.setFont(u8g2_font_ncenB08_tr);   // choose a suitable font
+  u8g2.drawStr(5,10,Tstatus);    //print the status
+  u8g2.drawStr(60,10,&quot;Count: &quot;);
+  u8g2.drawStr(98,10,C_count); 
+  u8g2.drawStr(110,10,&quot;/10&quot;); 
+  u8g2.drawStr(10,30,C_bright);
+  u8g2.drawStr(80,30,C_angle);
+  u8g2.drawStr(10,50,&quot;Brightness&quot;);
+  u8g2.drawStr(80,50,&quot;Motor&quot;);
+  u8g2.sendBuffer();                    // transfer internal memory to the display
+
+  
+
+}
+
+void setup() {
+    Serial.begin(9600);
+    Servo1.attach(servoPin); 
+    pinMode(button, INPUT);
+    analogWrite(LEDPin,0);
+    
+    u8g2.begin(); //set up the screen
+    u8g2.setFlipMode(1); //flip the screen for readablility
+    u8g2.clearBuffer();
+     LIS.begin(WIRE,0x19); //IIC init
+     LIS.setFullScaleRange(LIS3DHTR_RANGE_2G);
+     LIS.setOutputDataRate(LIS3DHTR_DATARATE_50HZ);
+     Tstatus=&quot;Training&quot;;
+}
+
+void loop() {
+  if(Mode==&quot;Mode2&quot;){
+    fade_value=fade(Rspeed);
+    analogWrite(LEDPin,fade_value);
+    disp();
+  }
+  Rspeed = analogRead(sensorPin); //rotary encoder value
+  turn_angle=conv(Rspeed);        //calculating angle for servo
+  Servo1.write(turn_angle);       //turning the servo
+  brightness = analogRead(lightPin);
+  buttonState=digitalRead(button);    //reading button state
+  if (buttonState){  
+    while(digitalRead(button)){
+      if(LIS.getAccelerationZ()&gt;0 and flipState==0){  // make sure the board is upright
+        flipState=1;
+      }
+      else if(LIS.getAccelerationZ()&lt;-0.5 and flipState==1){  // and followed by flipped
+        flipState=2;
+      }
+      else if(LIS.getAccelerationZ()&gt;0 and flipState==2){
+        if (Mode==&quot;Mode1&quot;){
+          Mode=&quot;Mode2&quot;;
+          
+        }
+        else{
+          Mode=&quot;Mode1&quot;;
+          u8g2.clearBuffer();  
+          u8g2.sendBuffer(); 
+          analogWrite(LEDPin,0);
+          }
+        flipState=0;
+        count=-1;
+        buzz(2,300);
+        break;                  // to leave as soon as the board is flipped
+      }
+      
+      delay(10);
+    }
+    flipState=0;
+    while(digitalRead(button)){  // to hold while the button is still pressed
+      delay(50);
+    }
+    if(count&lt;0){ // condition for when they come out of different modes
+      count=0;  
+    }
+    else if(count&gt;=0 &amp;&amp; count&lt;10){                   //if training data is less than 10
+      training[count][0]=turn_angle;      //save angle to array
+      training[count][1]=brightness;      //save brightness to array
+      training[count][2]=fade_value;      //save fade value to array  
+      buzz(1);  
+      count++;
+    }
+    else{             //when there are already 10 training data
+      buzz(2);
+      Tstatus=&quot;Running&quot;;
+      while(!digitalRead(button)){  //pressing the button will escape the run mode
+        brightness = analogRead(lightPin);
+        mini=1000;
+        turn_angle=0;
+        for (int i=0;i&lt;10;i++){
+          dist=abs(brightness - training[i][1]);
+          if (dist&lt;mini){
+            mini=dist;
+            turn_angle=training[i][0];
+            fade_value=training[i][2];
+          }
+        }
+        Servo1.write(turn_angle);
+        if(Mode==&quot;Mode2&quot;){
+          analogWrite(LEDPin,fade_value); 
+          disp();
+        }
+        delay(100);
+      }
+      count=0;
+      Tstatus=&quot;Training&quot;;
+    }
+    delay(50);
+  }
+}</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
